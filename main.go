@@ -2,49 +2,59 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"log"
 	"net/http"
 )
-
 type User struct{
-	name string
-	age uint16
-	money int16
-	avg_point, happiness float32
+	Name string
+	Age uint16
+	Money int16
+	Avg_point, Happiness float32
+	Hobbies []string
 
 }
 func home_page(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Main page")
+	// fmt.Fprintf(w, "Main page")
+	bob := User{
+		Name: "Bob",
+		Age: 32,
+		Money: 1000,
+		Avg_point: 10.4,
+		Happiness: 0.8,
+		Hobbies: []string{"swim", "run"}}
+
+	// fmt.Fprintf(w, "Hello, %s\n", bob.Name) 
+	// bob.setNewName("Tom")
+	// fmt.Fprint(w, bob.getFullInfo()) 
+	tmpl,_ := template.ParseFiles("src/templates/home_page.html")
+	tmpl.Execute(w, bob)
 }
 func (u *User) getFullInfo() string{
-	return fmt.Sprintf("Name: %s, age: %d, money: %d, avg_point: %f, happiness: %f", u.name, u.age, u.money, u.avg_point, u.happiness)
+	return fmt.Sprintf("Name: %s, age: %d, money: %d, avg_point: %f " +
+	"happiness: %f", u.Name, u.Age, u.Money, u.Avg_point, u.Happiness)
 }
 func (u *User) setNewName(newName string) {
-	u.name = newName
+	u.Name = newName
 }
 func contacts_page(w http.ResponseWriter, r *http.Request) {
-	bob := User{
-		name: "Bob",
-		age: 32,
-		money: 1000,
-		avg_point: 10.4,
-		happiness: 0.8	}
-
-	fmt.Fprintf(w, "Hello, %s\n", bob.name) 
-	bob.setNewName("Tom")
-	fmt.Fprint(w, bob.getFullInfo()) 
-	fmt.Fprintf(w, "\n Contacts page")
-	
+	tmpl,_ := template.ParseFiles("src/templates/contacts_page.html")
+	tmpl.Execute(w, nil)
 }
 
 func handleRequest(){
 	
-
-http.HandleFunc("/",home_page)
-http.HandleFunc("/contacts/",contacts_page)
-http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/",home_page)
+	mux.HandleFunc("/contacts/",contacts_page)
+fileServer := http.FileServer(http.Dir("./ui/static/"))
+mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+log.Println("Запуск сервера на http://127.0.0.1:8080")
+err :=http.ListenAndServe(":8080", mux)
+log.Fatal(err)
 }
 func main() {
-	fmt.Println("Hello, World!")
+	
 	handleRequest()
 }
 

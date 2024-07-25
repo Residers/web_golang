@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/people.png" />
+    <link href="/static/output.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/contacts/" target="_self" rel="noopener noreferrer">Contacts</a>
+    </nav>
+    <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <h1>Hi {{ .Name }}</h1>
+    <h2>Parametrs</h2>
+    <p>Age: {{ .Age }}</p>
+    <p>Money: {{ .Money }}</p>
+    <p>Avg_point: {{ .Avg_point }}</p>
+    <p>Happiness: {{ .Happiness }}</p>
+    <h2>Hobbies:</h2>
+    <ul>
+      {{ range .Hobbies }}
+      <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </body>
+</html>
