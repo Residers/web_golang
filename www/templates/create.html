@@ -1,0 +1,22 @@
+{{define "create"}} {{template "header"}}
+<div class="create">
+  <h1>Create article</h1>
+  <form action="/save_article" method="post">
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="Enter your title"
+    /><br />
+    <textarea name="anons" id="anons" placeholder="Enter your anons"></textarea
+    ><br />
+    <textarea
+      name="full_text"
+      id="full_text"
+      placeholder="Enter your text"
+    ></textarea>
+    <br />
+    <button>Create</button><br />
+  </form>
+</div>
+{{template "footer"}} {{end}}

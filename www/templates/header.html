@@ -1,0 +1,45 @@
+{{define "header"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/people.png" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Golang site it`s amazing</h1>
+        <nav>
+          <a
+            href="/"
+            target="_self"
+            rel="noopener noreferrer"
+            class="header__link"
+          >
+            Main page
+          </a>
+          <a
+            href="/contacts/"
+            target="_self"
+            rel="noopener noreferrer"
+            class="header__link"
+            >Contacts
+          </a>
+          <a
+            href="/create/"
+            target="_self"
+            rel="noopener noreferrer"
+            class="header__link"
+          >
+            Create
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    {{ end }}
+  </body>
+</html>

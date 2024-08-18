@@ -1,0 +1,7 @@
+@import "./footer.css";
+@import "./header.css";
+@import "./create.css";
+
+body {
+  background: white;
+}
