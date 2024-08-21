@@ -103,6 +103,8 @@ func getAllArticles(db *sql.DB) []Article {
 	}
 	return posts
 }
+
+// new comment
 func handleFunc() {
 	log.Println("Запуск handleFunc")
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
