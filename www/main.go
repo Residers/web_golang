@@ -71,6 +71,7 @@ func insertInDb(db *sql.DB, title string, anons string, full_text string) {
 	defer insert.Close()
 }
 
+// new code in main
 type Article struct {
 	Id        uint16 `json:"id"`
 	Title     string `json:"title"`
